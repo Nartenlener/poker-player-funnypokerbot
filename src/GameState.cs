@@ -58,5 +58,14 @@ namespace Nancy.Simple
         {
             return this.Rank > a.Rank;
         }
+
+        public bool EqualTo(Card a)
+        {
+            return this.Rank == a.Rank;
+        }
     }
 }
+
+
+
+

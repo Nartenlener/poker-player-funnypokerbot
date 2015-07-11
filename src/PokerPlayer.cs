@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
@@ -17,7 +18,32 @@ namespace Nancy.Simple
 	            Card[] cards = gs.players[gs.in_action].hole_cards.Take(2).ToArray();
 	            Tuple<Card, Card> firstHand = new Tuple<Card, Card>(cards[0], cards[1]);
 
-	            if (sh.RankHand(firstHand) == StaringHandsRank.Strong) return GetCallAmount(gs);
+			    if (gs.community_cards.Length == 0)
+			    {
+			        if (sh.HandRank2Cards(firstHand) == HandsRank.Call) return GetCallAmount(gs);
+			        else return 0;
+			    }
+			    else
+			    {
+                    List<Card> allCards = new List<Card>();
+                    allCards.AddRange(gs.players[gs.in_action].hole_cards);
+                    allCards.AddRange(gs.community_cards);
+
+			        switch (sh.HandRankMoreCards(allCards))
+			        {
+			            case HandsRank.Call:
+			                return GetCallAmount(gs);
+
+                        case HandsRank.AllIn:
+                            return GetAllInAmount(gs);
+
+                        case HandsRank.Raise:
+                            return GetRaiseAmount(gs);
+                        case HandsRank.Fold:
+			                return 0;
+
+			        }
+			    }
 			} catch(Exception e) {
 				Console.WriteLine (gameState.ToString ());
 				Console.WriteLine (e.Message);
@@ -26,7 +52,12 @@ namespace Nancy.Simple
             return 0;
         }
 
-		public static void ShowDown(JObject gameState)
+	    private static int GetRaiseAmount(GameState gameState)
+	    {
+	        return gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
+	    }
+
+	    public static void ShowDown(JObject gameState)
 		{
 			//TODO: Use this method to showdown
 		}
