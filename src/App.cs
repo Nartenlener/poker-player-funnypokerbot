@@ -5,9 +5,9 @@ namespace Nancy.Simple
 {
 	public class App
 	{
-		const string StagingPort = "8080";
+		public const string StagingPort = "8080";
 
-		const string STAGINGHOST = "http://localhost:" + StagingPort;
+		public const string STAGINGHOST = "http://localhost:" + StagingPort;
 
 		static readonly string HOST = Environment.GetEnvironmentVariable ("HOST");
 		static readonly string PORT = Environment.GetEnvironmentVariable ("PORT");
