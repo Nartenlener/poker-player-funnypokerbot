@@ -43,6 +43,9 @@ namespace Nancy.Simple
 
 		public HandsRank HandRank2Cards(Tuple<Card,Card> inCard)
 		{
+            if (inCard.Item2.GreaterThan(inCard.Item1))
+                inCard = new Tuple<Card, Card>(inCard.Item2, inCard.Item1);
+
 			string conf = inCard.Item1.rank + inCard.Item2.rank;
 
 			if (strongPair.Contains (conf))
