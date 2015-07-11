@@ -3,9 +3,11 @@ using Nancy.Hosting.Self;
 
 namespace Nancy.Simple
 {
-	class App
+	public class App
 	{
 		const string StagingPort = "8080";
+
+		const string STAGINGHOST = "http://localhost:" + StagingPort;
 
 		static readonly string HOST = Environment.GetEnvironmentVariable ("HOST");
 		static readonly string PORT = Environment.GetEnvironmentVariable ("PORT");
@@ -24,7 +26,7 @@ namespace Nancy.Simple
 			get {
 				switch (CurrentEnv) {
 				case Env.Staging:
-					return new Uri ("http://localhost:8080");
+					return new Uri (STAGINGHOST);
 				case Env.Deployment:
 					return new Uri (HOST.Substring(0, HOST.Length - 1) + ":" + PORT);
 				default:
