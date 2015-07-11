@@ -24,7 +24,7 @@ namespace Tests
 		}
 
         [Test()]
-        public void ShouldBeAlive()
+        public void ShouldReturnVersion()
         {
 			var client = new RestClient(App.STAGINGHOST);
             
