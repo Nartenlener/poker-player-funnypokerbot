@@ -34,6 +34,11 @@ namespace Nancy.Simple
 	{
 		public string rank { get; set; }
 		public string suit { get; set; }
+
+        public bool GreaterThan(Card a) {
+            if (this.rank == "A" && a.rank != "A") return true;
+            return false;
+        }
 	}
 
 }
