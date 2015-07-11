@@ -8,7 +8,7 @@ namespace Nancy.Simple
 {
     public static class PokerPlayer
     {
-        public static readonly string VERSION = "=====================================================================!!!Winning&Trolling!!!====================";
+        public static readonly string VERSION = "!!!Winning&Trolling!!!====================";
 
         public static int BetRequest(JObject gameState)
         {
@@ -59,9 +59,7 @@ namespace Nancy.Simple
             }
             catch (Exception e)
             {
-                Console.WriteLine(gameState.ToString());
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+               
             }
             return 0;
         }
