@@ -22,6 +22,16 @@ namespace Nancy.Simple
 		public static GameState GetGameStateFromJObject(JObject gameState){
 			return gameState.ToObject<GameState> ();
 		}
+
+	    public static int GetCallAmount(GameState gameState)
+	    {
+	        return gameState.current_buy_in - gameState.players[gameState.in_action].bet;
+	    }
+
+	    public static int GetAllInAmount(GameState gameState)
+	    {
+	        return gameState.players[gameState.in_action].stack;
+	    }
 	}
 }
 
