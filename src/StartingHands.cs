@@ -28,8 +28,10 @@ namespace Nancy.Simple
 	        }
 	        switch (pairsCount)
 	        {
-	           case 0 :
-	                return HandsRank.Fold;
+	            case 0:
+                    if (FlushChecker.IsItStillFlushPossible(hand.ToArray()))
+                        return HandsRank.Call;
+                    return HandsRank.Fold;
                 case 1:
 	                return HandsRank.Call;
                 case 2:
@@ -50,7 +52,7 @@ namespace Nancy.Simple
 
 			if (strongPair.Contains (conf))
 				return HandsRank.Raise;
-			if (midPair.Contains (conf))
+			if (midPair.Contains (conf) || FlushChecker.IsItStillFlushPossible(new[] { inCard.Item1, inCard.Item2 }))
 				return HandsRank.Call;
 			if (latePair.Contains (conf))
 				return HandsRank.Fold;
