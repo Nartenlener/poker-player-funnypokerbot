@@ -5,7 +5,7 @@ namespace Nancy.Simple
 {
 	public static class PokerPlayer
 	{
-		public static readonly string VERSION = "Default C# folding player";
+		public static readonly string VERSION = "Version 2a";
 
 		public static int BetRequest(JObject gameState)
 		{
@@ -17,6 +17,22 @@ namespace Nancy.Simple
 		{
 			//TODO: Use this method to showdown
 		}
+
+        public static GameState GetGameStateFromJObject(JObject gameState)
+        {
+            return gameState.ToObject<GameState>();
+        }
+
+        public static int GetCallAmount(GameState gameState)
+        {
+            return gameState.current_buy_in - gameState.players[gameState.in_action].bet;
+        }
+
+        public static int GetAllInAmount(GameState gameState)
+        {
+            return gameState.players[gameState.in_action].stack;
+        }
+		
 	}
 }
 
