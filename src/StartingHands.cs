@@ -33,7 +33,7 @@ namespace Nancy.Simple
                 case 1:
 	                return HandsRank.Call;
                 case 2:
-                    return HandsRank.Call;
+                    return HandsRank.Raise;
                 case 3:
                     return HandsRank.Raise;
                 default:
