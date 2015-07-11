@@ -18,8 +18,8 @@ namespace Nancy.Simple
 			//TODO: Use this method to showdown
 		}
 
-		public GameState GetGameStateFromJObject(JObject gameState){
-			
+		public static GameState GetGameStateFromJObject(JObject gameState){
+			return null;
 		}
 	}
 }
