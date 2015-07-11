@@ -49,7 +49,7 @@ namespace Nancy.Simple
 			string conf = inCard.Item1.rank + inCard.Item2.rank;
 
 			if (strongPair.Contains (conf))
-				return HandsRank.Raise;
+				return HandsRank.Call;
 			if (midPair.Contains (conf))
 				return HandsRank.Call;
 			if (latePair.Contains (conf))
