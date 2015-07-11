@@ -46,11 +46,11 @@ namespace Nancy.Simple
 			string conf = inCard.Item1.rank + inCard.Item2.rank;
 
 			if (strongPair.Contains (conf))
-				return HandsRank.Call;
+				return HandsRank.Raise;
 			if (midPair.Contains (conf))
-				return StaringHandsRank.Mid;
+				return HandsRank.Call;
 			if (latePair.Contains (conf))
-				return StaringHandsRank.Late;
+				return HandsRank.Fold;
 			else
 				return HandsRank.Fold;
 		}
