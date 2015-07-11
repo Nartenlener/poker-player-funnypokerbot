@@ -8,7 +8,7 @@ namespace Nancy.Simple
 {
     public static class PokerPlayer
     {
-        public static readonly string VERSION = "$$$$$MONEY$$$";
+        public static readonly string VERSION = "$$$$$DOLLARS AND CIGGARETES$$$";
 
         public static int BetRequest(JObject gameState)
         {
@@ -19,10 +19,19 @@ namespace Nancy.Simple
                 StartingHands sh = new StartingHands();
                 Card[] cards = gs.players[gs.in_action].hole_cards.ToArray();
                 Tuple<Card, Card> firstHand = new Tuple<Card, Card>(cards[0], cards[1]);
-
+                int biggestStack = gs.players.Max(p => p.stack);
+                bool doWeHaveMoney = gs.players[gs.in_action].stack > (biggestStack/2d);
                 if (gs.community_cards.Length == 0)
                 {
-                    switch (sh.HandRank2Cards(firstHand))
+                    var act = sh.HandRank2Cards(firstHand);
+                    if(act==HandsRank.AllIn)
+                        act = HandsRank.Raise;
+                    else if(act==HandsRank.Raise)
+                        act = HandsRank.Call;
+                    else if(act==HandsRank.Call)
+                        act = HandsRank.Fold;
+                    
+                    switch (act)
                     {
                         case HandsRank.Call:
                             return GetCallAmount(gs);
@@ -40,7 +49,15 @@ namespace Nancy.Simple
                     allCards.AddRange(gs.players[gs.in_action].hole_cards);
                     allCards.AddRange(gs.community_cards);
 
-                    switch (sh.HandRankMoreCards(allCards))
+                    var act = sh.HandRankMoreCards(allCards);
+                    if (act == HandsRank.AllIn)
+                        act = HandsRank.Raise;
+                    else if (act == HandsRank.Raise)
+                        act = HandsRank.Call;
+                    else if (act == HandsRank.Call)
+                        act = HandsRank.Fold;
+
+                    switch (act)
                     {
                         case HandsRank.Call:
                             return GetCallAmount(gs);
