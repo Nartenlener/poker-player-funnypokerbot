@@ -21,7 +21,6 @@ namespace Nancy.Simple
 
 		public static GameState GetGameStateFromJObject(JObject gameState){
 			return gameState.ToObject<GameState> ();
-
 		}
 	}
 }
