@@ -8,7 +8,7 @@ namespace Nancy.Simple
 {
     public static class PokerPlayer
     {
-        public static readonly string VERSION = "Version 2b";
+        public static readonly string VERSION = "=====================================================================!!!Winning&Trolling!!!====================";
 
         public static int BetRequest(JObject gameState)
         {
@@ -17,7 +17,7 @@ namespace Nancy.Simple
                 //TODO: Use this method to return the value You want to bet
                 GameState gs = GetGameStateFromJObject(gameState);
                 StartingHands sh = new StartingHands();
-                Card[] cards = gs.players[gs.in_action].hole_cards.Take(2).ToArray();
+                Card[] cards = gs.players[gs.in_action].hole_cards.ToArray();
                 Tuple<Card, Card> firstHand = new Tuple<Card, Card>(cards[0], cards[1]);
 
                 if (gs.community_cards.Length == 0)
