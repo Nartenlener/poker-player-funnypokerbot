@@ -2,6 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System;
 
 namespace Nancy.Simple
 {
@@ -11,6 +12,7 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject gameState)
 		{
+            Console.WriteLine(VERSION);
 			//TODO: Use this method to return the value You want to bet
 		    GameState gs = GetGameStateFromJObject(gameState);
 			StartingHands sh = new StartingHands();
