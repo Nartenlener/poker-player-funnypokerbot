@@ -35,9 +35,24 @@ namespace Nancy.Simple
 		public string rank { get; set; }
 		public string suit { get; set; }
 
-        public bool GreaterThan(Card a) {
-            if (this.rank == "A" && a.rank != "A") return true;
-            return false;
+        public int Rank
+        {
+            get
+            {
+                if (char.IsDigit(rank[0])) return int.Parse(rank);
+                else
+                {
+                    if (rank == "J") return 11;
+                    else if (rank == "Q") return 12;
+                    else if (rank == "K") return 13;
+                    else if (rank == "A") return 14;
+                }
+                return 0;
+            }
+        }
+
+        public bool GreaterThan(Card a) {          
+            return this.Rank>a.Rank;
         }
 	}
 
