@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
@@ -7,11 +8,18 @@ namespace Nancy.Simple
 	{
 		public static readonly string VERSION = "Version 2a";
 
-		public static int BetRequest(JObject gameState)
-		{
-			//TODO: Use this method to return the value You want to bet
-			return 0;
-		}
+        public static int BetRequest(JObject gameState)
+        {
+            //TODO: Use this method to return the value You want to bet
+            GameState gs = GetGameStateFromJObject(gameState);
+            StartingHands sh = new StartingHands();
+            Card[] cards = gs.players[gs.in_action].hole_cards.Take(2).ToArray();
+            Tuple<Card, Card> firstHand = new Tuple<Card, Card>(cards[0], cards[1]);
+
+            if (sh.RankHand(firstHand) == StaringHandsRank.Strong) return GetCallAmount(gs);
+
+            return 0;
+        }
 
 		public static void ShowDown(JObject gameState)
 		{
