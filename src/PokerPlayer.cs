@@ -10,14 +10,19 @@ namespace Nancy.Simple
 
         public static int BetRequest(JObject gameState)
         {
-            //TODO: Use this method to return the value You want to bet
-            GameState gs = GetGameStateFromJObject(gameState);
-            StartingHands sh = new StartingHands();
-            Card[] cards = gs.players[gs.in_action].hole_cards.Take(2).ToArray();
-            Tuple<Card, Card> firstHand = new Tuple<Card, Card>(cards[0], cards[1]);
+			try {
+	            //TODO: Use this method to return the value You want to bet
+	            GameState gs = GetGameStateFromJObject(gameState);
+	            StartingHands sh = new StartingHands();
+	            Card[] cards = gs.players[gs.in_action].hole_cards.Take(2).ToArray();
+	            Tuple<Card, Card> firstHand = new Tuple<Card, Card>(cards[0], cards[1]);
 
-            if (sh.RankHand(firstHand) == StaringHandsRank.Strong) return GetCallAmount(gs);
-
+	            if (sh.RankHand(firstHand) == StaringHandsRank.Strong) return GetCallAmount(gs);
+			} catch(Exception e) {
+				Console.WriteLine (gameState.ToString ());
+				Console.WriteLine (e.Message);
+				Console.WriteLine (e.StackTrace);
+			}
             return 0;
         }
 
