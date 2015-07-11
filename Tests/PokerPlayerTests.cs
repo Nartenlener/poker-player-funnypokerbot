@@ -28,7 +28,7 @@ namespace Tests
       ""stack"":1000,
       ""status"":""active"",
       ""bet"":0,
-      ""hole_cards"":[],
+      ""hole_cards"":[{""rank"": ""6"",""suit"": ""hearts""}, {""rank"": ""K"",""suit"": ""spades""}],
       ""version"":""Version name 2"",
       ""id"":1
     }
@@ -67,6 +67,10 @@ namespace Tests
             Assert.AreEqual(result.players[0].hole_cards.Count(), 0);
             Assert.AreEqual(result.players[0].version, "Version name 1");
             Assert.AreEqual(result.players[0].id, 0);
+
+            Assert.AreEqual(result.players[1].hole_cards.Count(), 2);
+            Assert.AreEqual(result.players[1].hole_cards[0].rank, "6");
+            Assert.AreEqual(result.players[1].hole_cards[0].suit, "hearts");
 
             Assert.AreEqual(result.tournament_id, "550d1d68cd7bd10003000003");
             Assert.AreEqual(result.game_id, "550da1cb2d909006e90004b1");
