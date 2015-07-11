@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Nancy.Simple
 {
@@ -19,7 +20,8 @@ namespace Nancy.Simple
 		}
 
 		public static GameState GetGameStateFromJObject(JObject gameState){
-			return null;
+			return gameState.ToObject<GameState> ();
+
 		}
 	}
 }
